@@ -29,10 +29,14 @@
         - zabbix-server
         - history
       block:
-        - name: Stop Zabbix server
-          ansible.builtin.service:
-            name: zabbix-server
-            state: stopped
+        - name: Correct UI config
+          ansible.builtin.lineinfile:
+            path: /etc/zabbix/web/zabbix.conf.php
+            search_string: "$DB['DOUBLE_IEEE754'] = true;"
+            insertbefore: '\?\>'
+            line: $DB['DOUBLE_IEEE754'] = true;
+          register: webconf
+          notify: Restart Zabbix server
 
         - name: Upgrade to numeric values of extended range
           community.mysql.mysql_query:
@@ -44,18 +48,13 @@
                 MODIFY value_avg DOUBLE PRECISION DEFAULT '0.0000' NOT NULL,
                 MODIFY value_max DOUBLE PRECISION DEFAULT '0.0000' NOT NULL;
               ALTER TABLE history MODIFY value DOUBLE PRECISION DEFAULT '0.0000' NOT NULL;
+          when: webconf.changed
 
-        - name: Correct UI config
-          ansible.builtin.lineinfile:
-            path: /usr/share/zabbix/conf/zabbix.conf.php
-            search_string: "$DB['DOUBLE_IEEE754'] = true;"
-            insertbefore: '\?\>'
-            line: $DB['DOUBLE_IEEE754'] = true;
-
-        - name: Start Zabbix server
-          ansible.builtin.service:
-            name: zabbix-server
-            state: started
+  handlers:
+    - name: Retart Zabbix server
+      ansible.builtin.service:
+        name: zabbix-server
+        state: restarted
 
 # Since the Zabbix Server by default does not have a frontend, let's install
 # Apache, PHP and then the Zabbix Web service

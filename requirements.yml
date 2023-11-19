@@ -1,0 +1,12 @@
+---
+collections:
+  - name: ansible.netcommon
+  - name: ansible.posix
+  - name: community.general
+  - name: community.mysql
+  - name: community.zabbix
+roles:
+  - name: bertvv.hosts
+  - name: geerlingguy.apache
+  - name: geerlingguy.mysql
+  - name: geerlingguy.php

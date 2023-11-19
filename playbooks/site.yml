@@ -1,0 +1,53 @@
+---
+
+# First, we ensure all of the Ansible inventory details are entered
+# in the /etc/hosts file on the nodes.
+- name: Ensure inventory hosts in hosts file
+  hosts: all
+  become: true
+  roles:
+    - role: bertvv.hosts
+      tags: hosts
+
+# Then we install a MySQL server and the Zabbix Server.
+- name: Ensure Zabbix server
+  hosts: zabbix-server
+  become: true
+
+  roles:
+    - role: geerlingguy.mysql
+      tags: mysql
+    - role: community.zabbix.zabbix_server
+      tags:
+        - zabbix
+        - zabbix-server
+
+# Since the Zabbix Server by default does not have a frontend, let's install
+# Apache, PHP and then the Zabbix Web service
+- name: Ensure Zabbix web
+  hosts: zabbix-server
+  become: true
+
+  roles:
+    - role: geerlingguy.apache
+      tags: apache
+    - role: geerlingguy.php
+      tags: php
+    - role: community.zabbix.zabbix_web
+      tags:
+        - zabbix
+        - zabbix-server
+
+# After that, we ensure that our zabbix-client machines have the zabbix-agent2
+# installed and configured. We also install a zabbix-agent2 on the server. Then
+# clients will also be added to the Zabbix host group Linux servers and linked
+# to the appropriate template
+- name: Ensure Zabbix agent2 installation
+  hosts: zabbix_clients
+  become: true
+
+  roles:
+    - role: community.zabbix.zabbix_agent
+      tags:
+        - zabbix
+        - zabbix-clients

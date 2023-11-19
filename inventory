@@ -1,0 +1,8 @@
+zabbix-server   ansible_host=192.168.66.11
+zabbix-client01 ansible_host=192.168.66.12
+zabbix-client02 ansible_host=192.168.66.13
+
+[zabbix_clients]
+zabbix-server
+zabbix-client01
+zabbix-client02

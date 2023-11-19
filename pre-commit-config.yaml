@@ -1,0 +1,18 @@
+---
+# Configuration for (git) pre-commit framework (https://github.com/pre-commit/pre-commit)
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+      - id: check-yaml
+
+  - repo: https://github.com/ansible/ansible-lint.git
+    rev: v6.21.1
+    hooks:
+      - id: ansible-lint
+        files: \.(yaml|yml)$

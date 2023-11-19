@@ -1,0 +1,11 @@
+## Directories to ignore
+/collections/*
+!/collections/.gitkeep
+
+/roles/*
+!/roles/.gitkeep
+
+## File types to ignore
+._*
+*.swp
+*~

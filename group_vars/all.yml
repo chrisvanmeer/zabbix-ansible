@@ -1,0 +1,17 @@
+---
+
+# Add the managed hosts to the /etc/hosts file
+hosts_add_ansible_managed_hosts: true
+
+# Default settings for communicating with the Zabbix Server
+zabbix_api_server_url: zabbix-server
+zabbix_server_hostname: zabbix-server
+zabbix_server_database: mysql
+zabbix_server_mysql_login_user: root
+zabbix_server_mysql_login_password: root  # Depends on your mysql role settings
+
+# By default, the "old" Zabbix Agent is installed, we don't want that and thus
+# we set these options to install the Zabbix Agent2
+zabbix_agent2: true
+zabbix_agent_package_remove: true
+zabbix_agent2_server: zabbix-server

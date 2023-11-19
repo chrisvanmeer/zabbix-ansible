@@ -1,0 +1,7 @@
+---
+
+# For the server, there is already a host created and configured at 127.0.0.1
+# so we don't want to mess with that and prevent the duplicate host creation.
+zabbix_agent2_listenip: 127.0.0.1
+zabbix_agent2_server: 127.0.0.1
+zabbix_agent_host_state: absent

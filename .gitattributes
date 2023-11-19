@@ -1,0 +1,7 @@
+## Linguist: treat YAML as code instead of data
+*.yml linguist-detectable=true text eol=lf
+
+## Git Settings
+# text=auto : All files are checked into the repo with LF line endings
+# eol=lf    : Files are checked out using LF locally
+* text=auto  eol=lf

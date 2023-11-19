@@ -1,0 +1,21 @@
+---
+# ansible-lint configuration directives
+# Project Homepage: https://github.com/ansible/ansible-lint
+# Documentation: https://ansible-lint.readthedocs.io
+#
+# Configuration file documentation:
+# https://ansible-lint.readthedocs.io/configuring/#ansible-lint-configuration
+#
+
+# exclude_paths included in this file are parsed relative to this file's location
+# and not relative to the CWD of execution. CLI arguments passed to the --exclude
+# option are parsed relative to the CWD of execution.
+exclude_paths:
+  - collections/
+  - roles/
+
+# Return non-zero exit code on warnings as well as errors
+strict: true
+
+# Use terse parseable output
+parseable: true

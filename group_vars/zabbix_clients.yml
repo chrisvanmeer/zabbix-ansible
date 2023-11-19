@@ -1,0 +1,13 @@
+---
+
+# Default settings for all Zabbix clients
+zabbix_api_server_host: zabbix-server
+zabbix_api_login_user: Admin
+zabbix_api_login_pass: zabbix
+zabbix_api_create_hostgroup: true
+zabbix_api_create_hosts: true
+zabbix_agent_host_state: present
+zabbix_host_groups:
+  - Linux servers
+zabbix_agent_link_templates:
+  - Linux by Zabbix agent

@@ -1,0 +1,6 @@
+---
+
+# Set a specific tag for demo purposes
+zabbix_agent_tags:
+  - tag: environment
+    value: production

@@ -1,0 +1,69 @@
+---
+# yamllint configuration directives
+# Project Homepage: https://github.com/adrienverge/yamllint
+#
+# Overriding rules in files:
+# http://yamllint.readthedocs.io/en/latest/disable_with_comments.html
+
+extends: default
+
+# Rules documentation: http://yamllint.readthedocs.io/en/latest/rules.html
+rules:
+
+  braces:
+    # Defaults
+    # min-spaces-inside: 0
+    # max-spaces-inside: 0
+
+    # Keeping 0 min-spaces to not error on empty dictionary definitions
+    min-spaces-inside: 0
+    # Allowing one space inside braces to improve code readability
+    max-spaces-inside: 1
+
+  brackets:
+    # Defaults
+    # min-spaces-inside: 0
+    # max-spaces-inside: 0
+
+    # Keeping 0 min-spaces to not error on empty list definitions
+    min-spaces-inside: 0
+    # Allowing one space inside braces to improve code readability
+    max-spaces-inside: 1
+
+  comments:
+    # Defaults
+    # level: warning
+    # require-starting-space: true
+    # min-spaces-from-content: 2
+
+    # Disabling to allow for code comment blocks and #!/usr/bin/ansible-playbook
+    require-starting-space: false
+
+  indentation:
+    # Defaults
+    # spaces: consistent
+    # indent-sequences: true
+    # check-multi-line-strings: false
+
+    # Requiring 2 space indentation
+    spaces: 2
+    # Requiring consistent indentation within a file, either indented or not
+    indent-sequences: consistent
+
+  # Allowing for 120 character wide lines instead of 80.
+  # Current displays can manage longer lines just fine.
+  line-length:
+    # Defaults
+    # max: 80
+    # allow-non-breakable-words: true
+    # allow-non-breakable-inline-mappings: false
+    level: warning
+    max: 120
+
+  # Allow for truthies in normal letters, no capital letters.
+  # Allow 'yes' and 'no' to be used as well; Ansible understands those fine.
+  truthy:
+    # Defaults
+    # level: warning
+    # allowed-values: ["true", "false"]
+    allowed-values: ["true", "false", "yes", "no"]

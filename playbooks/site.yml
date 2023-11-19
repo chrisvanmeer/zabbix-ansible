@@ -52,7 +52,7 @@
             insertbefore: '\?\>'
             line: $DB['DOUBLE_IEEE754'] = true;
 
-        - name: Stop Zabbix server
+        - name: Start Zabbix server
           ansible.builtin.service:
             name: zabbix-server
             state: started

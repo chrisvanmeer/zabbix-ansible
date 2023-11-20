@@ -48,7 +48,7 @@
                 MODIFY value_avg DOUBLE PRECISION DEFAULT '0.0000' NOT NULL,
                 MODIFY value_max DOUBLE PRECISION DEFAULT '0.0000' NOT NULL;
               ALTER TABLE history MODIFY value DOUBLE PRECISION DEFAULT '0.0000' NOT NULL;
-          when: webconf.changed
+          when: webconf.changed  # noqa: no-handler
 
   handlers:
     - name: Retart Zabbix server

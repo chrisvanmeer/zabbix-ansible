@@ -22,6 +22,22 @@
         - zabbix
         - zabbix-server
 
+# Since the Zabbix Server by default does not have a frontend, let's install
+# Apache, PHP and then the Zabbix Web service
+- name: Ensure Zabbix web
+  hosts: zabbix-server
+  become: true
+
+  roles:
+    - role: geerlingguy.apache
+      tags: apache
+    - role: geerlingguy.php
+      tags: php
+    - role: community.zabbix.zabbix_web
+      tags:
+        - zabbix
+        - zabbix-server
+
   tasks:
     - name: Correct History tables
       tags:
@@ -51,26 +67,10 @@
           when: webconf.changed  # noqa: no-handler
 
   handlers:
-    - name: Retart Zabbix server
+    - name: Restart Zabbix server
       ansible.builtin.service:
         name: zabbix-server
         state: restarted
-
-# Since the Zabbix Server by default does not have a frontend, let's install
-# Apache, PHP and then the Zabbix Web service
-- name: Ensure Zabbix web
-  hosts: zabbix-server
-  become: true
-
-  roles:
-    - role: geerlingguy.apache
-      tags: apache
-    - role: geerlingguy.php
-      tags: php
-    - role: community.zabbix.zabbix_web
-      tags:
-        - zabbix
-        - zabbix-server
 
 # After that, we ensure that our zabbix-client machines have the zabbix-agent2
 # installed and configured. We also install a zabbix-agent2 on the server. Then
